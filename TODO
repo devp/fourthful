@@ -1,3 +1,4 @@
+- new repo; link to old
 - import functionality into tests: interpret dnd4e file
 - translate sheet into template
 - standalone sinatra webapp for converting character sheets
