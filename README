@@ -1,1 +1,1 @@
-Fourthy.rb: A Ruby-based tool for working with D&D 4E character sheets.
+Fourthful: A Ruby-based tool for working with D&D 4E character sheets. Accepts import of the .dnd4e produced by the D&D Insider Character Builder.
