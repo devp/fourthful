@@ -1,12 +1,15 @@
-- (remaining character attributes)
 - character details
-  - powers
-  - features: keep description data?
-  - skill_trained? as boolean
-  - rituals
-  - power_points
-  - themes?
+  - powers: keep description + data
 - translate sheet into template
 - properly gemify
 - standalone sinatra webapp for converting character sheets
 - new repo; link to old
+- more character details
+  - features: keep description data?
+  - slayer/essentials: too many features displayed?
+  - items / gear / magic_items
+  - skill_trained? as boolean
+  - rituals
+  - power_points
+  - themes?
+  - weapon selection

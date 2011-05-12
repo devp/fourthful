@@ -14,6 +14,7 @@ class Fourthful
       :str_mod, :dex_mod, :con_mod, :wis_mod, :int_mod, :cha_mod,
       :background,
       :class_features, :racial_traits, :feats,
+      :powers,
     ] + Skill::SKILL_LIST + Skill::SKILL_LIST.map{|skill| "#{skill} Trained"}
 
     DND4E_DERIVED_ATTRIBUTES = [
@@ -32,8 +33,20 @@ class Fourthful
         end
       end
     end
+    
+    def [](key)
+      if respond_to?(key)
+        send(key)
+      else
+        attributes[key]
+      end
+    end
+    
+    def []=(key, value)
+      attributes[key] = value
+    end
         
-    def from_dnd4e_file(dnd4e_file)
+    def self.from_dnd4e_file(dnd4e_file)
       dnd4e_file = Fourthful::DND4E_File.new(dnd4e_file) if dnd4e_file.is_a?(String)
       character = Character.new
       character.dnd4e_file = dnd4e_file
@@ -54,18 +67,6 @@ class Fourthful
     def features
       self[:class_features] + self[:racial_traits] + self[:feats]
     end
-    
-    def [](key)
-      if respond_to?(key)
-        send(key)
-      else
-        attributes[key]
-      end
-    end
-    
-    def []=(key, value)
-      attributes[key] = value
-    end
-    
+        
   end
 end

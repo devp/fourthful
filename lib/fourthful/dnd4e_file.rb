@@ -77,13 +77,40 @@ class Fourthful
     
     def get_attribute_feats
       find_all_and_get_values("RulesElement[type='Feat']")
+    end    
+  end
+  
+  module PowerFinderHelpers
+    def get_attribute_powers
+      get_power_names.map do |power_name|
+        Power.from_dnd4e_file_and_power_name(self, power_name)
+      end
+    end
+    
+    def get_power_names
+      find_all_and_get_values("PowerStats Power")
+    end
+    
+    def get_power_attribute(power_name, attr)
+      attr = attr.to_s.split("_").map{|s| s[0].upcase + s[1..-1]}.join(" ")
+      if el = @doc.search("PowerStats Power[name='#{power_name}'] specific[name='#{attr}']").first
+        el.inner_text.strip
+      elsif el = @doc.search("PowerStats Power[name='#{power_name}'] Weapon[name!='Unarmed'] #{attr.gsub(' ', '')}").first
+        el.inner_text.strip
+      elsif el = @doc.search("PowerStats Power[name='#{power_name}'] Weapon[name='Unarmed'] #{attr.gsub(' ', '')}").first
+        el.inner_text.strip
+      else
+        nil
+      end
     end
   end
+  
     
   class DND4E_File
     include TextHelpers
     include SearchHelpers
     include AttributeFinderHelpers
+    include PowerFinderHelpers
 
     ATTRIBUTE_ALIASES = {
       "hp" => "Hit Points",

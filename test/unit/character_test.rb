@@ -25,4 +25,13 @@ class CharacterTest < Test::Unit::TestCase
     end
   end
   
+  def test_powers
+    power = @char[:powers].last
+    assert power.is_a?(Fourthful::Power)
+    assert power[:name]
+    assert power[:action_type]
+    assert power[:defense]
+    puts @char[:powers] if ENV['DEBUG']
+  end
+  
 end

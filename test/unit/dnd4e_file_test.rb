@@ -23,6 +23,7 @@ class DND4E_FileTest < Test::Unit::TestCase
       Charisma\ modifier
       str_mod cha_mod
       Racial\ Traits
+      powers
     }.each do |attr|
       assert @file[attr], "could not find attribute \"#{attr}\""
       puts "#{attr}: #{@file[attr]}" if ENV['DEBUG']
@@ -36,6 +37,12 @@ class DND4E_FileTest < Test::Unit::TestCase
       assert @file[attr], "could not find attribute \"#{attr}\""
       puts "#{attr}: #{@file[attr]}" if ENV['DEBUG']
     end
+  end
+  
+  def test_powers
+    assert (power_name = @file.get_power_names.last)
+    assert (@file.get_power_attribute(power_name, "Action Type"))
+    assert (@file.get_power_attribute(power_name, "Defense"))
   end
   
 end
