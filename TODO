@@ -1,7 +1,10 @@
-- github: change url to just "fourthful"
-- translate sheet into template
+- character sheets
+  - works w/ powers?
+  - HTML format + sample
+  - ERB format + sample
+  - document attributes for creating your own
 - standalone sinatra webapp for converting character sheets
-- new repo; link to old
+- make new repo public; link to old; release!
 - more character details
   - features: keep description data?
   - slayer/essentials: too many features displayed?

@@ -15,7 +15,7 @@ require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = "fourthful"
-  gem.homepage = "http://github.com/devp/fourthful-ruby"
+  gem.homepage = "http://github.com/devp/fourthful"
   gem.license = "MIT"
   gem.summary = "A library for working with D&D 4th Edition Character Sheets."
   gem.description = %Q{A library for working with D&D 4th Edition Character Sheets.}

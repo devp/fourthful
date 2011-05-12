@@ -8,7 +8,7 @@ class Fourthful
       :level, :xp, :gold,
       :hp, :healing_surges,
       :initiative, :speed,
-      :ac, :fortitude, :reflex, :will,
+      :armor_class, :ac, :fortitude, :reflex, :will,
       :passive_perception, :passive_insight,
       :str, :dex, :con, :wis, :int, :cha,
       :str_mod, :dex_mod, :con_mod, :wis_mod, :int_mod, :cha_mod,
