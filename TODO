@@ -1,7 +1,6 @@
-- character details
-  - powers: keep description + data
-- translate sheet into template
 - properly gemify
+- github: change url to just "fourthful"
+- translate sheet into template
 - standalone sinatra webapp for converting character sheets
 - new repo; link to old
 - more character details

@@ -1,30 +1,45 @@
-task :boot do
-  load(File.join(File.dirname(__FILE__), 'console_init.rb'))
+# encoding: utf-8
+
+require 'rubygems'
+require 'bundler'
+begin
+  Bundler.setup(:default, :development)
+rescue Bundler::BundlerError => e
+  $stderr.puts e.message
+  $stderr.puts "Run `bundle install` to install missing gems"
+  exit e.status_code
+end
+require 'rake'
+
+require 'jeweler'
+Jeweler::Tasks.new do |gem|
+  # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
+  gem.name = "fourthful"
+  gem.homepage = "http://github.com/devp/fourthful-ruby"
+  gem.license = "MIT"
+  gem.summary = "A library for working with D&D 4th Edition Character Sheets."
+  gem.description = %Q{A library for working with D&D 4th Edition Character Sheets.}
+  gem.email = "dev@forgreatjustice.net"
+  gem.authors = ["Dev Purkayastha"]
+  # dependencies defined in Gemfile
+end
+Jeweler::RubygemsDotOrgTasks.new
+
+require 'rake/testtask'
+Rake::TestTask.new(:test) do |test|
+  test.libs << 'lib' << 'test'
+  test.pattern = 'test/**/*_test.rb'
+  test.verbose = true
 end
 
-desc "Run all tests."
-task :test => ["test:units", "test:examples"]
+task :default => :test
 
-namespace :test do
-  task :prepare => :boot do
-    $:.unshift("#{File.dirname(__FILE__)}/test")
-  end
-
-  desc "Run all example tests."
-  task :examples => ["test:prepare"] do
-    test_files = Dir["#{File.dirname(__FILE__)}/test/examples/*_test.rb"]
-    puts "[test:examples] Running: #{test_files.empty? ? 'none' : test_files.map{|fn| File.basename(fn)}.join(', ')}"
-    test_files.each do |test_case|      
-      require test_case
-    end
-  end
-
-  desc "Run all unit tests."
-  task :units => ["test:prepare"] do
-    test_files = Dir["#{File.dirname(__FILE__)}/test/unit/*_test.rb"]
-    puts "[test:units] Running: #{test_files.empty? ? 'none' : test_files.map{|fn| File.basename(fn)}.join(', ')}"
-    test_files.each do |test_case|      
-      require test_case
-    end
-  end
-end
+# require 'rake/rdoctask'
+# Rake::RDocTask.new do |rdoc|
+#   version = File.exist?('VERSION') ? File.read('VERSION') : ""
+# 
+#   rdoc.rdoc_dir = 'rdoc'
+#   rdoc.title = "fourthful #{version}"
+#   rdoc.rdoc_files.include('README*')
+#   rdoc.rdoc_files.include('lib/**/*.rb')
+# end

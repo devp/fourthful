@@ -1,3 +1,5 @@
+require 'nokogiri'
+
 # A given Fourthful::DND4E_File points to a file and knows how to extract data from it.
 class Fourthful
   
