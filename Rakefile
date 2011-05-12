@@ -1,9 +1,15 @@
+task :boot do
+  require 'rubygems'
+  require "bundler/setup"
+  Bundler.require(:default)
+  $:.unshift("#{File.dirname(__FILE__)}/lib")
+end
+
 desc "Run all tests."
 task :test => ["test:units", "test:examples"]
 
 namespace :test do
-  task :prepare do
-    $:.unshift("#{File.dirname(__FILE__)}")
+  task :prepare => :boot do
     $:.unshift("#{File.dirname(__FILE__)}/test")
   end
 
