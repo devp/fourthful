@@ -1,6 +1,3 @@
-
-# require 'dnd/power'
-
 class Fourthful
   class Character
 
@@ -15,21 +12,18 @@ class Fourthful
       :passive_perception, :passive_insight,
       :str, :dex, :con, :wis, :int, :cha,
       :str_mod, :dex_mod, :con_mod, :wis_mod, :int_mod, :cha_mod,
-      # :skills,
-      # :powers,
-      # :power_points,
-      # items/gear
-      # :magic_items, :features, :equipment, :rituals, :backgrounds # ?
-    ]
-    
+      :background,
+      :class_features, :racial_traits, :feats,
+    ] + Skill::SKILL_LIST + Skill::SKILL_LIST.map{|skill| "#{skill} Trained"}
+
     DND4E_DERIVED_ATTRIBUTES = [
-      :bloodied_hp, :healing_surge_value,
+      :bloodied_hp, :healing_surge_value, :features
     ]
     
     # DND4E_TEMPORARY_ATTRIBUTES = [ :temp_hp ] # to be used later?
     
     DND4E_ATTRIBUTES = DND4E_BASE_ATTRIBUTES + DND4E_DERIVED_ATTRIBUTES
-        
+
     def initialize(initial_attributes={})
       @attributes = {}
       DND4E_ATTRIBUTES.each do |k|
@@ -55,6 +49,10 @@ class Fourthful
     
     def healing_surge_value
       self[:hp] / 4
+    end
+    
+    def features
+      self[:class_features] + self[:racial_traits] + self[:feats]
     end
     
     def [](key)

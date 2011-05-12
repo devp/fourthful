@@ -22,6 +22,7 @@ class DND4E_FileTest < Test::Unit::TestCase
       Wisdom\ modifier
       Charisma\ modifier
       str_mod cha_mod
+      Racial\ Traits
     }.each do |attr|
       assert @file[attr], "could not find attribute \"#{attr}\""
       puts "#{attr}: #{@file[attr]}" if ENV['DEBUG']

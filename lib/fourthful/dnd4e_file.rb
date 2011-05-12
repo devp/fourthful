@@ -19,8 +19,14 @@ class Fourthful
   end
   
   module SearchHelpers
+    def find_all_and_get_values(search_string)
+      @doc.search(search_string).map do |el|
+        get_value_from_element(el)
+      end.compact
+    end
+    
     def find_first_once(search_string)
-      @doc.search("#{search_string}").first
+      @doc.search(search_string).first
     end
     
     def find_first(search_string, key="")
@@ -59,9 +65,25 @@ class Fourthful
     end
   end
   
+  # these methods help find specific hard-to-find methods
+  module AttributeFinderHelpers
+    def get_attribute_racial_traits
+      find_all_and_get_values("RulesElement[type='Racial Trait']")
+    end
+    
+    def get_attribute_class_features
+      find_all_and_get_values("RulesElement[type='Class Feature']")
+    end
+    
+    def get_attribute_feats
+      find_all_and_get_values("RulesElement[type='Feat']")
+    end
+  end
+    
   class DND4E_File
     include TextHelpers
     include SearchHelpers
+    include AttributeFinderHelpers
 
     ATTRIBUTE_ALIASES = {
       "hp" => "Hit Points",
@@ -83,8 +105,8 @@ class Fourthful
     end
     
     def [](key)
-      if respond_to?("get_attribute_#{key}")
-        send("get_attribute_#{key}")
+      if respond_to?("get_attribute_#{key.to_s.gsub(" ", "_").downcase}")
+        send("get_attribute_#{key.to_s.gsub(" ", "_").downcase}")
       elsif ATTRIBUTE_ALIASES[key.to_s.downcase]
         get_attribute_default(ATTRIBUTE_ALIASES[key.to_s.downcase])
       else
@@ -108,9 +130,9 @@ class Fourthful
           value = get_value_from_element(el.parent)
           return value if value          
         end
-
+    
         return nil
       end
-      
+
   end
 end

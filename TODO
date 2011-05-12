@@ -1,6 +1,11 @@
-- derives attributes
-- skills, etc
-- powers
+- (remaining character attributes)
+- character details
+  - powers
+  - features: keep description data?
+  - skill_trained? as boolean
+  - rituals
+  - power_points
+  - themes?
 - translate sheet into template
 - properly gemify
 - standalone sinatra webapp for converting character sheets
