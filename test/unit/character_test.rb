@@ -19,6 +19,10 @@ class CharacterTest < Test::Unit::TestCase
   end
   
   def test_derived_attributes
+    Fourthful::Character::DND4E_DERIVED_ATTRIBUTES.each do |attr|
+      assert @char[attr], "could not find attribute \"#{attr}\""
+      puts "#{attr}: #{@char[attr]}" if ENV['DEBUG']
+    end
   end
   
 end
