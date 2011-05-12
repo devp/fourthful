@@ -1,8 +1,5 @@
 task :boot do
-  require 'rubygems'
-  require "bundler/setup"
-  Bundler.require(:default)
-  $:.unshift("#{File.dirname(__FILE__)}/lib")
+  load(File.join(File.dirname(__FILE__), 'console_init.rb'))
 end
 
 desc "Run all tests."
