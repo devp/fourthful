@@ -21,6 +21,7 @@ class DND4E_FileTest < Test::Unit::TestCase
       Intelligence\ modifier
       Wisdom\ modifier
       Charisma\ modifier
+      str_mod
     }.each do |attr|
       assert @file[attr] && !@file[attr].empty?, "could not find attribute \"#{attr}\""
     end

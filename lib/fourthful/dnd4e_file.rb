@@ -11,7 +11,10 @@ class Fourthful
     end
     
     def capitalize(str)
-      present?(str) && (str[0].upcase + str[1..-1])
+      return str unless present?(str)
+      str.split(" ").map do |substr|
+        substr[0].upcase + substr[1..-1]
+      end.join(" ")
     end
   end
   
@@ -21,12 +24,14 @@ class Fourthful
     end
     
     def find_first(search_string, key="")
+      key = key && key.to_s.gsub("_", " ")
       if blank?(key)
         value = find_first_once(search_string)
       else
         value = find_first_once(search_string.sub(":key", key))
         value ||= find_first_once(search_string.sub(":key", capitalize(key)))
         value ||= find_first_once(search_string.sub(":key", key.downcase))
+        value ||= find_first_once(search_string.sub(":key", key.upcase))
       end
       value
     end
@@ -53,7 +58,14 @@ class Fourthful
     ATTRIBUTE_ALIASES = {
       "hp" => "Hit Points",
       "xp" => "Experience",
-      "gold" => "CarriedMoney"
+      "gold" => "CarriedMoney",
+      "character_class" => "Class",
+      "str_mod" => "Strength modifier",
+      "dex_mod" => "Dexterity modifier",
+      "con_mod" => "Constitution modifier",
+      "wis_mod" => "Wisdom modifier",
+      "int_mod" => "Intelligence modifier",
+      "cha_mod" => "Charisma modifier",
     }
     
     attr_accessor :doc
