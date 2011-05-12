@@ -1,4 +1,3 @@
-- properly gemify
 - github: change url to just "fourthful"
 - translate sheet into template
 - standalone sinatra webapp for converting character sheets
