@@ -1,11 +1,24 @@
 require 'test_helper'
 
 class CharacterTest < Test::Unit::TestCase
-  def test_create_from_dnd4e_file
+  def setup
     file = Fourthful::DND4E_File.new(File.join(TEST_DATA_DIR, 'Keira.dnd4e'))
-    char = Fourthful::Character.new(file)
-    Fourthful::Character::DND4E_ATTRIBUTES.each do |attr|
-      assert char[attr] && !char[attr].empty?, "could not find attribute \"#{attr}\""
+    @char = Fourthful::Character.new(file)
+
+  end
+
+  def test_created_from_dnd4e_file
+    assert @char
+  end
+  
+  def test_base_attributes
+    Fourthful::Character::DND4E_BASE_ATTRIBUTES.each do |attr|
+      assert @char[attr], "could not find attribute \"#{attr}\""
+      puts "#{attr}: #{@char[attr]}" if ENV['DEBUG']
     end
   end
+  
+  def test_derived_attributes
+  end
+  
 end

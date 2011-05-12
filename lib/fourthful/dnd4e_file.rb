@@ -3,7 +3,7 @@ class Fourthful
   
   module TextHelpers
     def blank?(str)
-      !str || str.empty?
+      !str || (str.respond_to?(:empty?) && str.empty?)
     end
 
     def present?(str)
@@ -37,17 +37,25 @@ class Fourthful
     end
     
     def get_value_from_element(el)
-      if el.nil?
-        return nil
+      # attempt to extract value
+      value = if el.nil?
+        nil
       elsif present?(el['value'])
-        return el['value'].strip
+        el['value'].strip
       elsif present?(el['name'])
-        return el['name'].strip
+        el['name'].strip
       elsif present?(el.inner_text && el.inner_text.strip)
-        return el.inner_text.strip
+        el.inner_text.strip
       else
-        return nil
-      end        
+        nil
+      end
+      
+      # convert to integer if possible
+      if value =~ /^[0-9]+$/
+        value = value.to_i
+      end
+      
+      value
     end
   end
   
