@@ -5,7 +5,7 @@ class Fourthful
   class Character
     
     DND4E_ATTRIBUTES = [
-      :name, :level, :character_class, :character_race,
+      :name, :level, :character_class, :race,
       :level, :xp, :gold,
       :hp, :healing_surges,
       :bloodied_hp, :healing_surge_value, :temp_hp, # derived or temporary
